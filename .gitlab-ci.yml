@@ -19,7 +19,7 @@ build-docker-master:
   only:
     - master
 
-docker-build:
+build-docker-tagged:
   # Official docker image.
   image: docker:latest
   stage: build
