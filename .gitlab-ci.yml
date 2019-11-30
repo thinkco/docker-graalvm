@@ -1,5 +1,5 @@
 # This file is a template, and might need editing before it works on your project.
-docker-build-master:
+build-docker-master:
   # Official docker image.
   image: docker:latest
   stage: build
@@ -7,9 +7,15 @@ docker-build-master:
     - docker:dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - echo "$HARBOR_PASSWORD" | docker login -u "$HARBOR_USER" registry.thinkco.de --password-stdin
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE" .
     - docker push "$CI_REGISTRY_IMAGE"
+    - docker build --pull -t "registry.thinkco.de/thinkco/graalvm" .
+    - docker push "registry.thinkco.de/thinkco/graalvm"
+    - docker build --pull -t "thinkco/graalvm" .
+    - docker push "thinkco/graalvm"
   only:
     - master
 
@@ -21,8 +27,14 @@ docker-build:
     - docker:dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - echo "$HARBOR_PASSWORD" | docker login -u "$HARBOR_USER" registry.thinkco.de --password-stdin
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
     - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
+    - docker build --pull -t "registry.thinkco.de/thinkco/graalvm:$CI_COMMIT_REF_SLUG" .
+    - docker push "registry.thinkco.de/thinkco/graalvm:$CI_COMMIT_REF_SLUG"
+    - docker build --pull -t "thinkco/graalvm:$CI_COMMIT_REF_SLUG" .
+    - docker push "thinkco/graalvm:$CI_COMMIT_REF_SLUG"
   except:
     - master
