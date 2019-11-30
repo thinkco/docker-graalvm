@@ -30,11 +30,11 @@ build-docker-tagged:
     - echo "$HARBOR_PASSWORD" | docker login -u "$HARBOR_USER" registry.thinkco.de --password-stdin
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:CI_COMMIT_REF_NAME" .
-    - docker push "$CI_REGISTRY_IMAGE:CI_COMMIT_REF_NAME"
-    - docker build --pull -t "registry.thinkco.de/thinkco/graalvm:CI_COMMIT_REF_NAME" .
-    - docker push "registry.thinkco.de/thinkco/graalvm:CI_COMMIT_REF_NAME"
-    - docker build --pull -t "thinkco/graalvm:CI_COMMIT_REF_NAME" .
-    - docker push "thinkco/graalvm:CI_COMMIT_REF_NAME"
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME" .
+    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
+    - docker build --pull -t "registry.thinkco.de/thinkco/graalvm:$CI_COMMIT_REF_NAME" .
+    - docker push "registry.thinkco.de/thinkco/graalvm:$CI_COMMIT_REF_NAME"
+    - docker build --pull -t "thinkco/graalvm:$CI_COMMIT_REF_NAME" .
+    - docker push "thinkco/graalvm:$CI_COMMIT_REF_NAME"
   except:
     - master
