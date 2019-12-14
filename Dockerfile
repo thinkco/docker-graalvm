@@ -8,3 +8,5 @@ WORKDIR /app
 
 # Include Native Image Support
 RUN $JAVA_HOME/bin/gu install native-image
+# Include LLVM Support
+RUN $JAVA_HOME/bin/gu install llvm-toolchain
