@@ -4,7 +4,9 @@
 
 ## Tag History
 
-* 19.2.1 - Native Image + LLVM Toolchain
+* **19.3.0-java8** - Java 8, Native Image + LLVM Toolchain
+* **19.3.0** - Java 8, Native Image + LLVM Toolchain
+* **19.2.1** - Native Image + LLVM Toolchain
 
 ---
 Brought to you by Thinkco.de!
