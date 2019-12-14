@@ -2,6 +2,10 @@
 
 ![GraalVM](https://miro.medium.com/max/1560/1*LPCG2xlLiUdqcYJulzxvmw.png)
 
+## Tag History
+
+* 19.2.1 - Native Image + LLVM Toolchain
+
 ---
 Brought to you by Thinkco.de!
 
